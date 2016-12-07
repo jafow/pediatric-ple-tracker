@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 conn = sqlite3.connect('ple-tracker.sqlite')
 c = conn.cursor()
@@ -20,6 +21,10 @@ def parse_optional_input(prompt_string, prompt_fn):
     else:
         return prompt_fn()
 
+def parse_date_input(input_string):
+    current_year = datetime.datetime.now().year
+    return current_year + '-' + input_string
+
 def notes_prompt():
     user_input = str(input('Please include any additional notes here: '))
     return user_input
@@ -33,7 +38,7 @@ def parse_input(input_type, prompt_string):
 
 # Prompts for user input
 entry_list = [
-    parse_input(str, 'Date of entry (yyyy-mm-dd): '),
+    parse_date_input(parse_input(str, 'Date of entry (mm-dd): ')),
     parse_input(float, 'Weight in lbs : '),
     parse_input(float,'Arm size in cm: '),
     parse_input(float, 'Abdomen size in cm: '),
