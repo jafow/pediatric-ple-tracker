@@ -23,7 +23,7 @@ def parse_optional_input(prompt_string, prompt_fn):
 
 def parse_date_input(input_string):
     current_year = datetime.datetime.now().year
-    return current_year + '-' + input_string
+    return "%s-%s" % (current_year, input_string)
 
 def notes_prompt():
     user_input = str(input('Please include any additional notes here: '))
